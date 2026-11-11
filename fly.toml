@@ -1,25 +1,26 @@
-app = "CHANGE-ME-your-app-name"
-primary_region = "iad"
+# fly.toml app configuration file generated for oraclecloudsanjose on 2026-11-11T02:59:06Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'oraclecloudsanjose'
+primary_region = 'lax'
 
 [build]
-
 [http_service]
   internal_port = 8080
   force_https = true
-  # PS Proxy keeps your logins/tokens in memory: a machine that sleeps or a second machine makes sites like Twitch forget them
-  auto_stop_machines = "off"
+  auto_stop_machines = 'off'
   auto_start_machines = true
   min_machines_running = 1
 
-  # fly's default limit is ~25 simultaneous connections, and one web page easily opens more than that
-  # (images, scripts, video chunks). Past the limit requests wait in line, which looks like a frozen or blank page.
   [http_service.concurrency]
-    type = "requests"
-    soft_limit = 200
+    type = 'requests'
     hard_limit = 250
+    soft_limit = 200
 
-# 256 MB (the default) runs out of memory on big pages and the machine restarts mid-load
 [[vm]]
-  memory = "1gb"
-  cpu_kind = "shared"
+  memory = '1gb'
+  cpu_kind = 'shared'
   cpus = 1
+  memory_mb = 512
